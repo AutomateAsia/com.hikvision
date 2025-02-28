@@ -1,8 +1,8 @@
 {
     "id": "com.hikvision",
     "version": "0.2.3",
-    "compatibility": ">=2.4.0",
-    "sdk": 2,
+    "compatibility": ">=5.0.0",
+    "sdk": 3,
     "name": {
         "en": "Hikvision",
         "nl": "Hikvision",
@@ -14,10 +14,10 @@
         "de": "Unterstützung für Hikvision Kameras"
     },
     "category": "security",
-	"homeyCommunityTopicId": 16642,
+    "homeyCommunityTopicId": 16642,
     "tags": {
-        "en": ["Hikvision","Camera","Security", "ABUS", "Grundig", "Annke", "CCTVStar"],
-        "nl": ["Hikvision","Camera","Security", "ABUS", "Grundig", "Annke", "CCTVStar"]
+        "en": ["Hikvision", "Camera", "Security", "ABUS", "Grundig", "Annke", "CCTVStar"],
+        "nl": ["Hikvision", "Camera", "Security", "ABUS", "Grundig", "Annke", "CCTVStar"]
     },
     "images": {
         "large": "/assets/images/large.png",
