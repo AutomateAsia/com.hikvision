@@ -1,0 +1,637 @@
+{
+    "id": "com.hikvision",
+    "version": "0.2.3",
+    "compatibility": ">=5.0.0",
+    "sdk": 3,
+    "name": {
+        "en": "Hikvision",
+        "nl": "Hikvision",
+        "de": "Hikvision"
+    },
+    "description": {
+        "en": "Will add support to the Hikvision Cameras",
+        "nl": "Voegt ondersteuning toe voor Hikvision Camera's",
+        "de": "Unterstützung für Hikvision Kameras"
+    },
+    "category": "security",
+    "homeyCommunityTopicId": 16642,
+    "tags": {
+        "en": ["Hikvision", "Camera", "Security", "ABUS", "Grundig", "Annke", "CCTVStar"],
+        "nl": ["Hikvision", "Camera", "Security", "ABUS", "Grundig", "Annke", "CCTVStar"]
+    },
+    "images": {
+        "large": "/assets/images/large.png",
+        "small": "/assets/images/small.png"
+    },
+    "author": {
+        "email": "martin@pussamsies.de",
+        "name": "Martin P"
+    },
+    "contributors": {
+        "developers": []
+    },
+    "brandColor": "#d71820",
+    "contributing": {
+        "donate": {
+            "paypal": {
+                "username": "mapulu"
+            }
+        }
+    },
+    "capabilities": {
+        "hik_type": {
+            "type": "string",
+            "title": {
+                "en": "Type",
+                "nl": "Type",
+				"de": "Typ"
+            },
+            "getable": true,
+            "setable": false,
+		    "icon": "/assets/info.svg"
+        },
+        "hik_version": {
+            "type": "string",
+            "title": {
+                "en": "Version",
+                "nl": "Versie",
+				"de": "Version"
+            },
+            "getable": true,
+            "setable": false,
+			"icon": "/assets/info.svg"
+        },
+		        "hik_status": {
+            "type": "boolean",
+            "title": {
+                "en": "Connected",
+                "nl": "Aangesloten",
+				"de": "Verbunden"
+            },
+			"insights": true,
+			"insightsTitleTrue": { 
+			"en": "Connected",
+			"nl": "Aangesloten",
+			"de": "Verbunden" 
+			},
+			"insightsTitleFalse": { 
+			"en": "Disconnected",
+			"nl": "Losgekoppeld",
+			"de": "Getrennt"
+			},
+            "getable": true,
+            "setable": false,
+		    "icon": "/assets/info.svg"
+        }
+    },
+    "flow": {
+        "triggers": [
+			{
+            "id": "OnConnected",
+            "title": {
+                "en": "Connected",
+                "nl": "Connected",
+				"de": "Verbunden"
+            },
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+		{
+            "id": "OnDisconnected",
+            "title": {
+                "en": "Disconnected",
+                "nl": "Disconnected",
+				"de": "Getrennt"
+            },
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+		{
+            "id": "OnError",
+            "title": {
+                "en": "Connection Error",
+                "nl": "Connection Error",
+				"de": "Verbindungsfehler"
+            },
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+		{
+            "id": "VideoMotionStart",
+            "title": {
+                "en": "VideoMotion Start",
+                "nl": "Video beweging gestart",
+				"de": "Bewegung Start"
+            },
+			"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "VideoMotionStop",
+            "title": {
+                "en": "VideoMotion Stop",
+                "nl": "Video beweging gestopt",
+				"de": "Bewegung Ende"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "AlarmLocalStart",
+            "title": {
+                "en": "Alarm Local Start",
+                "nl": "Lokaal alarm gestart",
+				"de": "Lokaler Alarm Start"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "AlarmLocalStop",
+            "title": {
+                "en": "Alarm local stop",
+                "nl": "Lokaal alarm gestopt",
+				"de": "Lokaler Alarm Ende"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "VideoLossStart",
+            "title": {
+                "en": "Videoloss Start",
+                "nl": "Geen Videosignaal",
+				"de": "Videoverlust Start"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "VideoLossStop",
+            "title": {
+                "en": "Videoloss Stop",
+                "nl": "Video signaal aanwezig",
+				"de": "Videoverlust Ende"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "VideoBlindStart",
+            "title": {
+                "en": "Videoblind start",
+                "nl": "Videoblind start",
+				"de": "Sabotage Start"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "VideoBlindStop",
+            "title": {
+                "en": "Video Unblind",
+                "nl": "Video Unblind",
+				"de": "Sabotage Ende"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		  ],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }   
+		  ]  
+		  },
+		  {
+            "id": "LineDetectionStart",
+            "title": {
+                "en": "Line Crossing Detection Start",
+                "nl": "Line CrossingDetection Start",
+				"de": "Linienüberquerungsdetektion Start"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "LineDetectionStop",
+            "title": {
+                "en": "Line Crossing Detection Stop",
+                "nl": "Line Crossing Detection Stop",
+				"de": "Linienüberquerungsdetektion Ende"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+		  {
+            "id": "IntrusionDetectionStart",
+            "title": {
+                "en": "Intrusion Detection Sart",
+                "nl": "Intrusion Detection Start",
+				"de": "Einbruchmeldung Start"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        },
+        {
+            "id": "IntrusionDetectionStop",
+            "title": {
+                "en": "Intrusion Detection Stop",
+                "nl": "Intrusion Detection Stop",
+				"de": "Einbruchmeldung Ende"
+            },
+						"tokens": [
+          {
+            "name": "channelID",
+            "type": "number",
+            "title": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+            },
+            "example": "2"
+          }
+		],
+            "args": [
+              {
+                "name": "device",
+                "type": "device",
+                "filter" : "driver_id=hikvision-camnvr"
+              }
+            ]
+        }
+    ],
+        "actions": [
+            {
+                "id":"ptzcontinuous",
+                "title": {
+                    "en": "Relative PTZ",
+                    "nl": "Relative PTZ",
+                    "de": "Relativer PTZ"
+                },
+                "titleFormatted": {
+                    "en": "Set relative PTZ: Cam: [[channel]] Pan: [[pannumber]] Tilt: [[tiltnumber]] Zoom: [[zoomnumber]]"
+                    },
+                        "hint": {
+                            "en": "Relative Values (-100 to 100)",
+                            "nl": "Relative Values(-100 to 100)",
+                            "de": "Relative Werte (-100 bis 100)"
+                        },   
+                "args": [
+						 {
+                        "name": "pannumber",
+                        "type": "number",
+                        "min": -100,
+                        "max": 100,
+                        "step": 0.1,
+			"placeholder": {
+                            "en": "Pan number",
+                            "nl": "Pan nummer",
+							"de": "Pan nummer"
+                        } 						
+                    },
+		                               {
+                        "name": "tiltnumber",
+                        "type": "number",
+                        "min": -100,
+                        "max": 100,
+                        "step": 0.1,
+                        "placeholder": {
+                            "en": "Tilt number",
+                            "nl": "Tilt nummer",
+							"de": "Tilt nummer"
+                        }
+                    },
+                    {
+                        "name": "zoomnumber",
+                        "type": "number",
+                        "min": -100,
+                        "max": 100,
+                        "step": 0.1,
+                        "placeholder": {
+                            "en": "Zoom number",
+                            "nl": "Zoom nummer",
+							"de": "Zoom nummer"
+                        }                        
+                    },
+				    {
+                        "name": "channel",
+                        "type": "number",
+                        "min": 0,
+                        "max": 36,
+                        "step": 1,
+                        "placeholder": {
+                            "en": "Camera Number",
+                            "nl": "Camera Number",
+                            "de": "Kamera Nummer"
+                        }                        
+                    },
+                    {
+                        "name": "device",
+                        "type": "device",
+                        "filter": "driver_id=hikvision-camnvr"
+                    }
+                  ]   
+            }
+        ]
+    },
+    "drivers": [
+        {
+            "id": "hikvision-camnvr",
+            "class": "sensor",
+            "capabilities": ["hik_type","hik_version","hik_status"],
+            "name": {
+                "en": "Hikvision Device",
+                "nl": "Hikvision Device",
+		"de": "Hikvision Gerät"
+            },
+            "images": {
+                "large": "/drivers/hikvision-camnvr/assets/images/large.png",
+                "small": "/drivers/hikvision-camnvr/assets/images/small.png"
+            },
+			"pair": [
+				{
+					"id": "start"
+				}
+			],
+            "settings": [
+                {
+                    "type": "group",
+                    "label": {
+						"en": "Hikvision Camera settings",
+						"nl": "Hikvision Camera instellingen",
+						"de": "Hikvision Kamera Einstellungen"
+                    },
+                    "children": [
+                        {
+							"id": "address",
+							"type": "text",
+							"value": "0.0.0.0",
+							"label": {
+								"en": "IP Address",
+								"nl": "IP adres",
+								"de": "IP Adresse"
+							}
+                        },
+                        {
+                            "id": "username",
+                            "type": "text",
+                            "label": {
+                                "en": "Username",
+                                "nl": "Gebruikersnaam",
+								"de": "Benutzername"
+                            },
+                            "value": "admin",
+                            "hint": {
+                                "en": "Username of the ip camera",
+                                "nl": "Gebruikersnaam van de camera",
+								"de": "Benutzername der IP Kamera"
+                            }
+                        },
+                        {
+                            "id": "password",
+                            "type": "password",
+                            "label": {
+                                "en": "Password",
+                                "nl": "Wachtwoord",
+								"de": "Passwort"
+                            },
+                            "value": "",
+                            "hint": {
+                                "en": "Password of the ip camera",
+                                "nl": "Wachtwoord van de camera",
+								"de": "Passwort der IP Kamera"
+                            }
+                        },
+						{
+                            "id": "port",
+                            "type": "number",
+                            "label": {
+                                "en": "Port",
+                                "nl": "Port",
+								"de": "Port"
+                            },
+                            "value": 80
+                        },
+							{
+                            "id": "ssl",
+                            "type": "checkbox",
+                            "label": {
+                                "en": "SSL",
+                                "nl": "SSL",
+								"de": "SSL"
+                            },
+                            "value": false
+                        },
+												{
+                            "id": "strict",
+                            "type": "checkbox",
+                            "label": {
+                                "en": "Strict",
+                                "nl": "Strict",
+								"de": "Strict"
+                            },
+                            "value": false
+                        }
+						      
+                    ]
+                }           
+            ]
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="185.05386" height="24.996281" viewBox="0 0 48.962169 6.6135991" version="1.1" id="svg283" inkscape:version="0.92.0 r15299" sodipodi:docname="hikvision.svg">
+  <defs id="defs277">
+    <clipPath id="clipPath106" clipPathUnits="userSpaceOnUse">
+      <path inkscape:connector-curvature="0" id="path104" d="M 0,0 H 864 V 612 H 0 Z"/>
+    </clipPath>
+    <clipPath id="clipPath82" clipPathUnits="userSpaceOnUse">
+      <path inkscape:connector-curvature="0" id="path80" d="M 0,0 H 864 V 612 H 0 Z"/>
+    </clipPath>
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="4.2374315" inkscape:cx="94.632798" inkscape:cy="11.999428" inkscape:document-units="mm" inkscape:current-layer="layer1" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" units="px" inkscape:window-width="1280" inkscape:window-height="744" inkscape:window-x="-4" inkscape:window-y="-4" inkscape:window-maximized="1"/>
+  <metadata id="metadata280">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(36.377549,45.105417)">
+    <g id="g416" transform="translate(0.1322914,-0.13229155)">
+      <g transform="matrix(0.35277777,0,0,-0.35277777,-278.40102,-28.966657)" id="g76">
+        <g clip-path="url(#clipPath82)" id="g78">
+          <g transform="translate(765.577,36.5821)" id="g84">
+            <path inkscape:connector-curvature="0" id="path86" style="fill:#6b737b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 0,0 c -2.452,3.199 -0.467,8.191 4.019,8.245 h 9.122 L 12.319,6.011 H 7.489 4.944 C 3.718,5.996 3.036,4.491 3.715,3.573 4.858,1.816 6.789,0.587 8.006,-1.213 10.645,-4.764 7.984,-9.393 4.053,-9.404 H -5.98 l 0.821,2.233 h 5.456 2.467 c 1.215,0.015 1.893,1.515 1.258,2.414 C 3.019,-3.095 1.244,-1.518 0,0"/>
+          </g>
+        </g>
+      </g>
+      <g transform="matrix(0.35277777,0,0,-0.35277777,-27.348694,-38.554447)" id="g88">
+        <path inkscape:connector-curvature="0" id="path90" style="fill:#eb1a2c;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 0,0 H -5.302 L 1.204,17.649 H 1.358 6.353 6.506 Z"/>
+      </g>
+      <g transform="matrix(0.35277777,0,0,-0.35277777,-11.573249,-38.554447)" id="g92">
+        <path inkscape:connector-curvature="0" id="path94" style="fill:#6b737b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 0,0 H -4.995 L 1.511,17.649 H 6.506 Z"/>
+      </g>
+      <g transform="matrix(0.35277777,0,0,-0.35277777,-3.0000772,-38.554447)" id="g96">
+        <path inkscape:connector-curvature="0" id="path98" style="fill:#6b737b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 0,0 H -4.994 L 1.511,17.649 H 6.506 Z"/>
+      </g>
+      <g transform="matrix(0.35277777,0,0,-0.35277777,-0.33763057,-42.893653)" id="g108">
+        <path inkscape:connector-curvature="0" id="path110" style="fill:#6b737b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 0,0 c 1.74,3.675 5.406,5.627 8.798,5.515 h 1.312 v 0 h 1.785 c 2.612,-0.122 4.197,-2.279 4.331,-4.064 0.03,-0.422 0.026,-0.835 -0.03,-1.158 -0.042,-0.199 -0.088,-0.399 -0.137,-0.601 -0.547,-2.266 -1.371,-4.576 -2.45,-6.651 -1.74,-3.674 -5.407,-5.627 -8.799,-5.514 L 3.498,-12.474 H 3.479 1.713 c -2.611,0.123 -4.197,2.279 -4.331,4.064 -0.03,0.423 -0.025,0.836 0.031,1.159 0.042,0.198 0.087,0.399 0.137,0.6 C -1.903,-4.385 -1.079,-2.074 0,0 m 9.455,3.686 v 0 C 7.615,3.633 6.067,2.577 5.4,0.852 L 2.101,-8.135 C 2.012,-8.347 1.972,-8.582 1.979,-8.819 v -0.004 c 0,-0.96 0.747,-1.751 1.689,-1.823 h 0.488 c 1.839,0.053 3.386,1.111 4.053,2.835 l 3.299,8.987 c 0.088,0.213 0.128,0.447 0.121,0.684 v 0.004 c 0,0.96 -0.746,1.752 -1.688,1.824 z"/>
+      </g>
+      <g transform="matrix(0.35277777,0,0,-0.35277777,-33.095657,-42.383501)" id="g112">
+        <path inkscape:connector-curvature="0" id="path114" style="fill:#eb1a2c;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 0,0 H 6.315 L 8.82,6.795 h 5.302 L 8.013,-9.778 v 0.001 C 8.01,-9.783 8.007,-9.788 8.004,-9.793 7.76,-10.411 7.159,-10.85 6.457,-10.854 H 2.314 l 3.112,8.441 h -6.315 l -3.112,-8.441 h -5.302 l 6.506,17.649 h 5.302 z"/>
+      </g>
+      <g transform="matrix(0.35277777,0,0,-0.35277777,-22.773203,-42.439593)" id="g116">
+        <path inkscape:connector-curvature="0" id="path118" style="fill:#eb1a2c;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 0,0 8.642,6.636 h 3.962 L 3.769,-0.148 9.371,-11.009 H 4.869 c 0.015,0.004 0.028,0.007 0.04,0.008 -0.7,-0.047 -1.332,0.348 -1.62,0.946 -0.003,0.005 -0.006,0.01 -0.01,0.016 l -0.002,-0.008 -3.517,6.82 -1.325,-1.017 -2.495,-6.769 h -5.302 l 6.506,17.649 h 5.302 z"/>
+      </g>
+      <g transform="matrix(0.35277777,0,0,-0.35277777,-15.654818,-40.500726)" id="g120">
+        <path inkscape:connector-curvature="0" id="path122" style="fill:#6b737b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 0,0 8.123,12.132 h 2.932 L -0.284,-4.771 -0.285,-4.77 C -0.579,-5.21 -1.074,-5.5 -1.627,-5.517 h -0.108 c -0.018,0 -0.037,0.001 -0.055,0.002 0.004,0 0.01,-0.001 0.015,-0.002 h -0.178 -1.741 -0.862 l -1.388,17.649 h 4.991 z"/>
+      </g>
+      <g transform="matrix(0.35277777,0,0,-0.35277777,7.2442693,-42.76884)" id="g124">
+        <path inkscape:connector-curvature="0" id="path126" style="fill:#6b737b;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 0,0 -0.022,0.218 -4.526,-11.946 H -7.099 L -0.564,5.703 H 2.009 2.695 L 7.398,-6.224 11.814,5.703 h 2.574 L 7.852,-11.946 H 5.498 c -0.652,0.035 -1.209,0.447 -1.452,1.022 z"/>
+      </g>
+    </g>
+  </g>
+</svg>

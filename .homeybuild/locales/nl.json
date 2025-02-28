@@ -1,0 +1,21 @@
+{
+"disconnect": "Disconnected - Trying to (re-)connect",
+	  "pair": {
+		"title": "Hikvision Camera toevoegen",
+        "nosettings": "Vul a.u.b. alle verplichte velden in.",
+        "unauthorized": "Foutmelding 401: deze gebruiker is niet geautoriseerd, controleer of u de juiste inlog gegevens van uw camera heeft.",
+        "servererror": "Foutmelding 500: interne server fout",
+        "timeout": "Timeout foutmelding: zorg ervoor dat je het correcte IP adres hebt ingevoerd en dat de Hikvision Camera online is.",
+        "unknownerror": "Onbekende fout, weet je zeker dat je het juist IP adres hebt opgegeven en dat de Hikvision Camera op hetzelfde netwerk zit als Homey? Controleer a.u.b. je instellingen en probeer het nog eens.",
+        "intro": "Voer het IP adres van de Hikvision Camera in. Indien je een gebruikersnaam en wachtwoord van Hikvision Camera heb ingesteld deze ook hier invullen.",
+        "address": "IP adres",
+        "port": "Poort",
+        "username": "Gebruikersnaam",
+        "password": "Wachtwoord",
+        "polling": "Polling frequentie",
+        "success": "Hikvision Camera succesvol toegevoegd",
+        "test" : "Test connectie",
+        "testing" : "Hikvision Camera connectietest succesvol, je kan de Hikvision Camera nu verbinden.",
+        "connect": "Verbind"
+	}
+}

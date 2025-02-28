@@ -1,0 +1,166 @@
+<script type="text/javascript">
+    Homey.setTitle(__('pair.title'));
+
+    $(function() {
+        $('#test-connection').click(async function() {
+            $('.hikcamera-status').hide();
+            var inputAddress = $('#address').val().trim();
+            var inputUsername = $('#username').val().trim();
+            var inputPassword = $('#password').val().trim();
+            var inputPort = parseInt($('#port').val());
+            var inputSSL = $('#ssl').is(':checked');
+            var inputStrict = $('#strict').is(':checked');
+
+            if (inputAddress !== '') {
+                var deviceData = {
+                    address: inputAddress,
+                    username: inputUsername,
+                    password: inputPassword,
+                    port: inputPort,
+                    ssl: inputSSL,
+                    strict: inputStrict
+                };
+
+                try {
+                    Homey.emit('testConnection', deviceData, function(err, result) {
+                        if (err || !result) {
+                            showError(__('pair.unknownerror'));
+                            return;
+                        }
+
+                        if (result.error) {
+                            let errorMessage = __('pair.unknownerror');
+                            if (result.error == "401") errorMessage = __('pair.unauthorized');
+                            else if (result.error == "408" || result.error == "504") errorMessage = __('pair.timeout');
+                            else if (result.error == "404") errorMessage = __('pair.did.not.found');
+                            else if (result.error == "500") errorMessage = __('pair.servererror');
+                            showError(errorMessage);
+                            return;
+                        }
+
+                        if (result.name) {
+                            $('.typecamera').html(result.name);
+                            $('.idcamera').html(result.id);
+                            $('.hikcamera-test').show();
+                            $('#connect').prop('disabled', false);
+                        } else {
+                            showError(__('pair.unknownerror'));
+                        }
+                    });
+                } catch (error) {
+                    showError(__('pair.unknownerror'));
+                }
+            } else {
+                showError(__('pair.nosettings'));
+            }
+        });
+
+        $('#connect').click(function() {
+            var inputAddress = $('#address').val().trim();
+            var inputUsername = $('#username').val().trim();
+            var inputPassword = $('#password').val().trim();
+            var inputPort = parseInt($('#port').val());
+            var inputSSL = $('#ssl').is(':checked');
+            var inputStrict = $('#strict').is(':checked');
+
+            if (inputAddress !== '') {
+                var deviceData = {
+                    id: $('.idcamera').html().trim(),
+                };
+                var settings = {
+                    address: inputAddress,
+                    username: inputUsername,
+                    password: inputPassword,
+                    port: inputPort,
+                    ssl: inputSSL,
+                    strict: inputStrict
+                };
+
+                Homey.addDevice({
+                    name: $('.typecamera').html().trim(),
+                    data: deviceData,
+                    settings: settings
+                }, function(error) {
+                    if (error) {
+                        showError(error.message || error.toString());
+                        return;
+                    }
+                    $('.hikcamera-status').hide();
+                    $('.hikcamera-ok').show();
+                    Homey.done();
+                });
+            } else {
+                showError(__('pair.nosettings'));
+            }
+        });
+
+        $('#ssl').change(function() {
+            $('#port').val($(this).is(':checked') ? '443' : '80');
+        });
+
+        function showError(message) {
+            $('.hikcamera-status').hide();
+            $('.hikcamera-error').show();
+            $('.hikcamera-error-msg').html(message);
+            $('#connect').prop('disabled', true);
+        }
+    });
+</script>
+
+<style type="text/css">
+    .hikcamera-status {
+        display: none;
+    }
+    .buttons, .messages {
+        padding-top: 14px;
+    }
+</style>
+
+<p data-i18n="pair.intro"></p>
+<div class="hikcamera-pairing">
+    <div class="form-group">
+        <label for="address" data-i18n="pair.address">IP address</label>
+        <input type="text" class="form-control" id="address" placeholder="0.0.0.0" required>
+    </div>
+    <div class="form-group">
+        <label for="username" data-i18n="pair.username">Username</label>
+        <input type="text" class="form-control" id="username" value="admin">
+    </div>
+    <div class="form-group">
+        <label for="password" data-i18n="pair.password">Password</label>
+        <input type="password" class="form-control" id="password">
+    </div>
+    <div class="form-group">
+        <label for="port" data-i18n="pair.port">Port</label>
+        <input type="number" class="form-control" id="port" value="80">
+    </div>
+    <div class="form-group">
+        <label for="ssl" data-i18n="pair.ssl">SSL</label>
+        <input type="checkbox" class="form-control" id="ssl">
+    </div>
+    <div class="form-group">
+        <label for="strict" data-i18n="pair.strict">Strict SSL</label>
+        <input type="checkbox" class="form-control" id="strict">
+    </div>
+    <div class="form-group buttons">
+        <button id="test-connection" class="button" data-i18n="pair.test">Test Connection</button>
+        <button id="connect" class="button" data-i18n="pair.connect" disabled>Connect</button>
+    </div>
+</div>
+
+<div class="messages">
+    <label class="typecamera"></label>
+    <label class="idcamera"></label>
+    <p class="hikcamera-status hikcamera-test" style="color: #008C23;">
+        <i class="fa fa-check"></i>
+        <span class="hikcamera-test-msg" data-i18n="pair.testing">Camera connection test successful</span>
+    </p>
+    <p class="hikcamera-status hikcamera-ok" style="color: #008C23;">
+        <i class="fa fa-check"></i>
+        <span class="hikcamera-ok-msg" data-i18n="pair.success">Camera added successfully</span>
+    </p>
+    <p class="hikcamera-status hikcamera-error" style="color: #ff6300;">
+        <i class="fa fa-times"></i>
+        <span class="hikcamera-error-msg"></span>
+    </p>
+</div>
