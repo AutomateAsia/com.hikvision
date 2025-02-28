@@ -1,118 +1,89 @@
 'use strict';
 
 const Homey = require('homey');
-const request = require('request');
+const axios = require('axios');
 
 class HikvisionDriver extends Homey.Driver {
 
-    onInit() { 
-        this.log('Init driver');
+    async onInit() { 
+        this.log('Hikvision Driver Initialized');
 
         this.registerFlowCards();
 
-       
-
         new Homey.FlowCardAction('ptzcontinuous')
-        .register()
-        .registerRunListener(( args, state ) => {     
-                    if (args.device) {
-                        return Promise.resolve(args.device.ptzZoom(args.pannumber,args.tiltnumber,args.zoomnumber, args.channel));
-                    }
-                    return Promise.resolve( true );         
-        })  
- 
-		
-      
-
+            .register()
+            .registerRunListener(async (args) => {     
+                if (args.device) {
+                    return await args.device.ptzZoom(args.pannumber, args.tiltnumber, args.zoomnumber, args.channel);
+                }
+                return true;
+            });
     }
 
     registerFlowCards() {
         this._triggers = {
-			trgOnConnected: new Homey.FlowCardTriggerDevice('OnConnected').register(),
-			trgOnDisconnected: new Homey.FlowCardTriggerDevice('OnDisconnected').register(),
-			trgOnError: new Homey.FlowCardTriggerDevice('OnError').register(),
-			trgTVideoMotionStart: new Homey.FlowCardTriggerDevice('VideoMotionStart').register(),
-			trgVideoMotionStop: new Homey.FlowCardTriggerDevice('VideoMotionStop').register(),
-			trgAlarmLocalStart: new Homey.FlowCardTriggerDevice('AlarmLocalStart').register(),
-			trgAlarmLocalStop: new Homey.FlowCardTriggerDevice('AlarmLocalStop').register(),
-			trgVideoLossStart: new Homey.FlowCardTriggerDevice('VideoLossStart').register(),
-			trgVideoLossStop: new Homey.FlowCardTriggerDevice('VideoLossStop').register(),
-			trgVideoBlindStart: new Homey.FlowCardTriggerDevice('VideoBlindStart').register(),
-			trgVideoBlindStop: new Homey.FlowCardTriggerDevice('VideoBlindStop').register(),
-			trgLineDetectionStart: new Homey.FlowCardTriggerDevice('LineDetectionStart').register(),
-			trgLineDetectionStop: new Homey.FlowCardTriggerDevice('LineDetectionStop').register(),
-			trgIntrusionDetectionStart: new Homey.FlowCardTriggerDevice('IntrusionDetectionStart').register(),
-			trgIntrusionDetectionStop: new Homey.FlowCardTriggerDevice('IntrusionDetectionStop').register(),			
-		};
+            trgOnConnected: new Homey.FlowCardTriggerDevice('OnConnected').register(),
+            trgOnDisconnected: new Homey.FlowCardTriggerDevice('OnDisconnected').register(),
+            trgOnError: new Homey.FlowCardTriggerDevice('OnError').register(),
+            trgTVideoMotionStart: new Homey.FlowCardTriggerDevice('VideoMotionStart').register(),
+            trgVideoMotionStop: new Homey.FlowCardTriggerDevice('VideoMotionStop').register(),
+            trgAlarmLocalStart: new Homey.FlowCardTriggerDevice('AlarmLocalStart').register(),
+            trgAlarmLocalStop: new Homey.FlowCardTriggerDevice('AlarmLocalStop').register(),
+            trgVideoLossStart: new Homey.FlowCardTriggerDevice('VideoLossStart').register(),
+            trgVideoLossStop: new Homey.FlowCardTriggerDevice('VideoLossStop').register(),
+            trgVideoBlindStart: new Homey.FlowCardTriggerDevice('VideoBlindStart').register(),
+            trgVideoBlindStop: new Homey.FlowCardTriggerDevice('VideoBlindStop').register(),
+            trgLineDetectionStart: new Homey.FlowCardTriggerDevice('LineDetectionStart').register(),
+            trgLineDetectionStop: new Homey.FlowCardTriggerDevice('LineDetectionStop').register(),
+            trgIntrusionDetectionStart: new Homey.FlowCardTriggerDevice('IntrusionDetectionStart').register(),
+            trgIntrusionDetectionStop: new Homey.FlowCardTriggerDevice('IntrusionDetectionStop').register(),
+        };
     }
 
-    onPair(socket) {
-        socket.on('testConnection', function(data, callback) {
+    async onPair(socket) {
+        socket.on('testConnection', async (data, callback) => {
+            try {
+                const protocol = data.ssl ? 'https://' : 'http://';
+                const url = `${protocol}${data.address}:${data.port}/ISAPI/System/deviceInfo`;
 
-			
-        var protocol = data.ssl == true ? 'https://' : 'http://';
-		var checkconnect = request({url: protocol + data.address + ':' + data.port + '/ISAPI/System/deviceInfo', strictSSL: data.strict, rejectUnauthorized: data.strict, timeout: 5000},function (error, response, body) {
-			if(body){
-			console.log("## start test connection ##");
-			console.log(protocol + data.address + data.port + data.strict + data.username);
-			console.log(body);
-			var deviceName = body.match("<deviceName>(.*)</deviceName>");
-			var deviceID = body.match("<deviceID>(.*)</deviceID>");
-	        console.log(response.statusCode);
-            if ((error) || (response.statusCode !== 200)) {
-			    var deviceCallback = {};
-				deviceCallback.name = "";
-				deviceCallback.id = "";
-                if (response.statusCode)
-				{
-				deviceCallback.error = response.statusCode;
-				callback(error, deviceCallback);
-				}
-                else
-				{ 
-			    deviceCallback.error = 404;
-				callback(error, deviceCallback);
-				}
-            } else {
-				
-			var deviceCallback = {};
-				deviceCallback.name = deviceName[1];
-				deviceCallback.id = deviceID[1];
-				deviceCallback.error = "";
-               callback(false, deviceCallback);
+                this.log(`Testing connection: ${url}`);
+
+                const response = await axios.get(url, {
+                    auth: {
+                        username: data.username,
+                        password: data.password
+                    },
+                    timeout: 5000,
+                    httpsAgent: new (require('https').Agent)({ rejectUnauthorized: data.strict }),
+                });
+
+                if (response.status === 200) {
+                    const deviceName = response.data.match("<deviceName>(.*)</deviceName>")?.[1] || "Unknown";
+                    const deviceID = response.data.match("<deviceID>(.*)</deviceID>")?.[1] || "Unknown";
+
+                    this.log(`Device Found - Name: ${deviceName}, ID: ${deviceID}`);
+
+                    callback(null, { name: deviceName, id: deviceID, error: "" });
+                } else {
+                    this.log('Device Connection Failed', response.status);
+                    callback(true, { name: "", id: "", error: response.status });
+                }
+            } catch (error) {
+                this.log('Error in Pairing:', error.message);
+                callback(true, { name: "", id: "", error: 404 });
             }
-			}
-			else
-			{
-			var deviceCallback = {};
-				deviceCallback.name = "";
-				deviceCallback.id = "";
-				deviceCallback.error = 404;
-				callback(true, deviceCallback);
-			}
-        }).auth(data.username,data.password,false);
-		
-		
-
         });
     }
 
-    // this is the easiest method to overwrite, when only the template 'Drivers-Pairing-System-Views' is being used.
-    onPairListDevices( data, callback ) {
-        this.log("list devices");
-
-        var devices = [];
-
-        console.log(data);
-
-        callback(null,'dfdf');
-
-
+    async onPairListDevices(data, callback) {
+        try {
+            this.log("Listing Devices", data);
+            callback(null, []);
+        } catch (error) {
+            this.error("Error Listing Devices:", error.message);
+            callback(error);
+        }
     }
-	
-	
-	}
-
-
+}
 
 module.exports = HikvisionDriver;
