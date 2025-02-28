@@ -3,11 +3,10 @@
 const Homey = require('homey');
 
 class HikvisionApp extends Homey.App {
-	
-	onInit() {
-		this.log('Hikvision is running...');
-	}
-	
+
+    async onInit() {
+        this.log('Hikvision is running...');
+    }
 }
 
 module.exports = HikvisionApp;
