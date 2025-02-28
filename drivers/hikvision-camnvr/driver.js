@@ -1,7 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
-const axios = require('axios');
+const HikvisionAPI = require('./hikvision.js').hikvisionApi;
 
 class HikvisionDriver extends Homey.Driver {
 
@@ -43,46 +43,30 @@ class HikvisionDriver extends Homey.Driver {
     async onPair(socket) {
         socket.on('testConnection', async (data, callback) => {
             try {
-                const protocol = data.ssl ? 'https://' : 'http://';
-                const url = `${protocol}${data.address}:${data.port}/ISAPI/System/deviceInfo`;
-
-                this.log(`Testing connection: ${url}`);
-
-                const response = await axios.get(url, {
-                    auth: {
-                        username: data.username,
-                        password: data.password
-                    },
-                    timeout: 5000,
-                    httpsAgent: new (require('https').Agent)({ rejectUnauthorized: data.strict }),
+                const hikApi = new HikvisionAPI({
+                    host: data.address,
+                    port: data.port,
+                    ssl: data.ssl,
+                    strict: data.strict,
+                    user: data.username,
+                    pass: data.password,
+                    log: true
                 });
 
-                if (response.status === 200) {
-                    const deviceName = response.data.match("<deviceName>(.*)</deviceName>")?.[1] || "Unknown";
-                    const deviceID = response.data.match("<deviceID>(.*)</deviceID>")?.[1] || "Unknown";
+                hikApi.on('socket', async () => {
+                    callback(null, { name: data.address, id: data.address, error: "" });
+                });
 
-                    this.log(`Device Found - Name: ${deviceName}, ID: ${deviceID}`);
+                hikApi.on('error', async (error) => {
+                    this.error('Pairing error:', error);
+                    callback(true, { name: "", id: "", error: "Connection Failed" });
+                });
 
-                    callback(null, { name: deviceName, id: deviceID, error: "" });
-                } else {
-                    this.log('Device Connection Failed', response.status);
-                    callback(true, { name: "", id: "", error: response.status });
-                }
             } catch (error) {
-                this.log('Error in Pairing:', error.message);
-                callback(true, { name: "", id: "", error: 404 });
+                this.error('Pairing Failed:', error.message);
+                callback(true, { name: "", id: "", error: "Error in Pairing" });
             }
         });
-    }
-
-    async onPairListDevices(data, callback) {
-        try {
-            this.log("Listing Devices", data);
-            callback(null, []);
-        } catch (error) {
-            this.error("Error Listing Devices:", error.message);
-            callback(error);
-        }
     }
 }
 
